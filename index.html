@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Game Từ Vựng Tiếng Anh 6 - Global Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #2ECC71;
+            --danger: #E74C3C;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: #eef2f7;
+            color: var(--dark);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .score-board {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: flex;
+            gap: 20px;
+        }
+
+        .score-board span {
+            color: var(--primary);
+        }
+
+        /* Unit Selector dạng Thẻ chọn rút gọn */
+        .unit-container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .unit-label {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .unit-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--dark);
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background-color: var(--light);
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .unit-select:focus {
+            border-color: var(--primary);
+        }
+
+        /* Game Zone */
+        .game-zone {
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Mode Tabs */
+        .mode-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: #d1d5db;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .mode-btn.active {
+            background: var(--dark);
+            color: white;
+        }
+
+        /* Flashcard Component */
+        .flashcard-wrapper {
+            width: 100%;
+            perspective: 1000px;
+            height: 280px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card-front {
+            background: white;
+            border: 3px solid var(--primary);
+        }
+
+        .card-back {
+            background: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-word {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .card-ipa {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            background: #f1f2f6;
+            padding: 4px 15px;
+            border-radius: 20px;
+        }
+
+        .card-meaning {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-example {
+            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Quiz Component */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: none;
+        }
+
+        .quiz-question {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: var(--light);
+            border: 2px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #edf2f7;
+            border-color: #cbd5e1;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: var(--secondary);
+            color: #155724;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--danger);
+            color: #721c24;
+        }
+
+        /* Navigation Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .control-btn {
+            background: white;
+            border: 2px solid var(--dark);
+            color: var(--dark);
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎯 Từ Vựng Tiếng Anh 6</h1>
+        <p>Chương trình sách Global Success</p>
+    </header>
+
+    <div class="score-board">
+        <div>Đúng: <span id="correct-count">0</span></div>
+        <div>Đã làm: <span id="total-count">0</span></div>
+    </div>
+
+    <div class="unit-container">
+        <label for="unit-select" class="unit-label">📁 Chọn bài học ôn tập:</label>
+        <select id="unit-select" class="unit-select" onchange="handleUnitChange(this.value)">
+            <option value="1">Unit 1: My New School</option>
+            <option value="2">Unit 2: My House</option>
+            <option value="3">Unit 3: My Friends</option>
+            <option value="4">Unit 4: My Neighbourhood</option>
+            <option value="5">Unit 5: Natural Wonders of Viet Nam</option>
+            <option value="6">Unit 6: Our Tet Holiday</option>
+            <option value="7">Unit 7: Television</option>
+            <option value="8">Unit 8: Sports and Games</option>
+            <option value="9">Unit 9: Cities of the World</option>
+            <option value="10">Unit 10: Our Houses in the Future</option>
+            <option value="11">Unit 11: Our Greener World</option>
+            <option value="12">Unit 12: Robots</option>
+            <option value="all">🌟 Tổng hợp từ vựng (Unit 1 - Unit 12)</option>
+        </select>
+    </div>
+
+    <div class="game-zone">
+        <div class="mode-tabs">
+            <button class="mode-btn active" onclick="switchMode('flashcard')">🗂️ Flashcard</button>
+            <button class="mode-btn" onclick="switchMode('quiz')">📝 Trắc nghiệm IPA</button>
+        </div>
+
+        <div id="flashcard-section" style="width: 100%;">
+            <div class="flashcard-wrapper" onclick="toggleCard()">
+                <div class="flashcard" id="card">
+                    <div class="card-face card-front">
+                        <div class="card-word" id="front-word">Loading...</div>
+                        <div class="card-ipa" id="front-ipa">/.../</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="card-meaning" id="back-meaning">Ý nghĩa</div>
+                        <div class="card-example" id="back-example">Ví dụ minh họa</div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="control-btn" onclick="prevCard()">◀ Trước</button>
+                <button class="control-btn" onclick="nextCard()">Sau ▶</button>
+            </div>
+        </div>
+
+        <div id="quiz-section" class="quiz-container">
+            <div class="quiz-question">
+                <div class="question-label" id="quiz-label">Nhìn phiên âm đoán từ:</div>
+                <div class="question-text" id="quiz-target">/.../</div>
+            </div>
+            <div class="options-grid" id="options-grid">
+                </div>
+        </div>
+    </div>
+
+    <div class="footer-note">💡 Thiết kế bài học thông minh cùng thầy Danh English</div>
+
+    <script>
+        // DATA TỪ VỰNG CHUẨN GLOBAL SUCCESS LỚP 6
+        const vocabularyData = {
+            1: [
+                { word: "Compass", ipa: "/ˈkʌm.pəs/", meaning: "Compa, la bàn", example: "I use a compass in my math class." },
+                { word: "Textbook", ipa: "/ˈtekst.bʊk/", meaning: "Sách giáo khoa", example: "Don't forget to bring your English textbook." },
+                { word: "Uniform", ipa: "/ˈjuː.nɪ.fɔːm/", meaning: "Đồng phục", example: "We wear our school uniform on Mondays." },
+                { word: "Calculator", ipa: "/ˈkæl.kje.leɪ.tər/", meaning: "Máy tính bỏ túi", example: "Can I borrow your calculator?" },
+                { word: "Pencil sharpener", ipa: "/ˈpen.səl ˌʃɑː.pən.ər/", meaning: "Gọt bút chì", example: "My pencil sharpener is shaped like a robot." }
+            ],
+            2: [
+                { word: "Department store", ipa: "/dɪˈpɑːt.mənt ˌstɔːr/", meaning: "Cửa hàng bách hóa", example: "There is a big department store near my house." },
+                { word: "Chest of drawers", ipa: "/ˌtʃest əv ˈdrɔːz/", meaning: "Tủ ngăn kéo", example: "Put your clothes in the chest of drawers." },
+                { word: "Dishwasher", ipa: "/ˈdɪʃˌwɒʃ.ər/", meaning: "Máy rửa bát", example: "We have a modern dishwasher in the kitchen." },
+                { word: "Wardrobe", ipa: "/ˈwɔː.drəʊb/", meaning: "Tủ quần áo", example: "She hangs her new dress in the wardrobe." },
+                { word: "Stilts house", ipa: "/stɪlts haʊs/", meaning: "Nhà sàn", example: "Many minority groups live in a stilts house." }
+            ],
+            3: [
+                { word: "Creative", ipa: "/kriˈeɪ.tɪv/", meaning: "Sáng tạo", example: "Lan is very creative; she loves painting." },
+                { word: "Kind", ipa: "/kaɪnd/", meaning: "Tốt bụng", example: "He is very kind to help the old woman." },
+                { word: "Confident", ipa: "/ˈkɒn.fɪ.dənt/", meaning: "Tự tin", example: "You should feel confident about your speaking skills." },
+                { word: "Hard-working", ipa: "/ˌhɑːdˈwɜː.kɪŋ/", meaning: "Chăm chỉ", example: "The students are hard-working before the exam." },
+                { word: "Clever", ipa: "/ˈklev.ər/", meaning: "Thông minh, khéo léo", example: "The clever boy solved the puzzle quickly." }
+            ],
+            4: [
+                { word: "Cathedral", ipa: "/kəˈθiː.drəl/", meaning: "Nhà thờ lớn", example: "The city cathedral is a famous tourist attraction." },
+                { word: "Suburb", ipa: "/ˈsʌb.ɜːb/", meaning: "Ngoại ô", example: "They decided to move to a quiet suburb." },
+                { word: "Inconvenient", ipa: "/ˌɪn.kənˈviː.ni.ənt/", meaning: "Bất tiện", example: "The public transport here is a bit inconvenient." },
+                { word: "Historic", ipa: "/hɪˈstɒr.ɪk/", meaning: "Cổ kính, lịch sử", example: "Hoi An is a beautiful historic town." },
+                { word: "Square", ipa: "/skweər/", meaning: "Quảng trường", example: "People gather at the town square in the evening." }
+            ],
+            5: [
+                { word: "Waterfall", ipa: "/ˈwɔː.tə.fɔːl/", meaning: "Thác nước", example: "Ban Gioc is a magnificent waterfall." },
+                { word: "Plaster", ipa: "/ˈplɑː.stər/", meaning: "Băng dán cá nhân", example: "You should bring some plasters." },
+                { word: "Sleeping bag", ipa: "/ˈsliː.pɪŋ ˌbæɡ/", meaning: "Túi ngủ", example: "Keep warm in your sleeping bag." },
+                { word: "Backpack", ipa: "/ˈbæk.pæk/", meaning: "Ba lô", example: "Put your water bottle in your backpack." },
+                { word: "Desert", ipa: "/ˈdez.ət/", meaning: "Sa mạc", example: "It rarely rains in the Sahara desert." }
+            ],
+            6: [
+                { word: "Peach blossom", ipa: "/piːtʃ ˈblɒs.əm/", meaning: "Hoa đào", example: "Peach blossoms are traditional symbols of Tet." },
+                { word: "Apricot blossom", ipa: "/ˈeɪ.prɪ.kɒt ˈblɒs.əm/", meaning: "Hoa mai", example: "Southern people prefer decorating with apricot blossoms." },
+                { word: "Lucky money", ipa: "/ˈlʌk.i ˈmʌn.i/", meaning: "Tiền lì xì", example: "Children look forward to receiving lucky money." },
+                { word: "Fireworks", ipa: "/ˈfaɪə.wɜːks/", meaning: "Pháo hoa", example: "We watch the fireworks display at midnight." },
+                { word: "Gather", ipa: "/ˈɡæð.ər/", meaning: "Quây quần, tụ họp", example: "Family members gather to make Chung cake." }
+            ],
+            7: [
+                { word: "Comedy", ipa: "/ˈkɒm.ə.di/", meaning: "Phim hài", example: "We laughed a lot while watching that comedy." },
+                { word: "Documentary", ipa: "/ˌdɒk.jəˈmen.tər.i/", meaning: "Phim tài liệu", example: "This documentary tells the history of wild animals." },
+                { word: "Educational", ipa: "/ˌedʒ.ʊˈkeɪ.ʃən.əl/", meaning: "Mang tính giáo dục", example: "This TV channel provides educational programs." },
+                { word: "Viewer", ipa: "/ˈvjuː.ər/", meaning: "Người xem TV", example: "The game show attracted millions of viewers." },
+                { word: "Weatherman", ipa: "/ˈweð.ə.mæn/", meaning: "Người báo thời tiết", example: "The weatherman says it will rain tomorrow." }
+            ],
+            8: [
+                { word: "Badminton", ipa: "/ˈbæd.mɪn.tən/", meaning: "Cầu lông", example: "They play badminton in the park every morning." },
+                { word: "Goggles", ipa: "/ˈɡɒɡ.əlz/", meaning: "Kính bơi", example: "You must wear goggles when you swim here." },
+                { word: "Racket", ipa: "/ˈræk.ɪt/", meaning: "Vợt thể thao", example: "She bought a new tennis racket yesterday." },
+                { word: "Marathon", ipa: "/ˈmær.ə.θən/", meaning: "Đua ma-ra-tông", example: "He trained for six months to run the marathon." },
+                { word: "Gymnastics", ipa: "/dʒɪmˈnæs.tɪks/", meaning: "Thể dục dụng cụ", example: "She has practiced gymnastics since she was seven." }
+            ],
+            9: [
+                { word: "Continent", ipa: "/ˈkɒn.tɪ.nənt/", meaning: "Châu lục", example: "Asia is the largest continent in the world." },
+                { word: "Palace", ipa: "/ˈpæl.ɪs/", meaning: "Cung điện", example: "The Royal Palace is very beautiful and grand." },
+                { word: "Cuisine", ipa: "/kwɪˈziːn/", meaning: "Ẩm thực", example: "I really love traditional Vietnamese cuisine." },
+                { word: "Souvenir", ipa: "/ˌsuː.vənˈɪər/", meaning: "Quà lưu niệm", example: "She bought a small keychain as a souvenir." },
+                { word: "Tower", ipa: "/ˈtaʊ.ər/", meaning: "Tháp", example: "The Eiffel Tower is the symbol of Paris." }
+            ],
+            10: [
+                { word: "Wireless", ipa: "/ˈwaɪə.ləs/", meaning: "Không dây", example: "The internet connection is completely wireless." },
+                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
+                { word: "Solar energy", ipa: "/ˌsəʊ.lər ˈen.ə.dʒi/", meaning: "Năng lượng mặt trời", example: "Our future house will run on solar energy." },
+                { word: "Skyscraper", ipa: "/ˈskaɪˌskreɪ.pər/", meaning: "Nhà chọc trời", example: "There are many skyscrapers in New York City." },
+                { word: "Spaceboat", ipa: "/ˈspeɪs.bəʊt/", meaning: "Tàu vũ trụ", example: "We might travel by spaceboat in the future." }
+            ],
+            11: [
+                { word: "Environment", ipa: "/ɪnˈvaɪ.rən.mənt/", meaning: "Môi trường", example: "We should plant more trees to protect the environment." },
+                { word: "Recycle", ipa: "/ˌriːˈsaɪ.kl̩/", meaning: "Tái chế", example: "Don't throw away plastic bottles; recycle them!" },
+                { word: "Reusable", ipa: "/ˌriːˈjuː.zə.bl̩/", meaning: "Có thể tái sử dụng", example: "Bring your own reusable bag when shopping." },
+                { word: "Deforestation", ipa: "/dɪˌfɒr.ɪˈsteɪ.ʃən/", meaning: "Nạn phá rừng", example: "Deforestation is a serious global problem." },
+                { word: "Pollute", ipa: "/pəˈluːt/", meaning: "Làm ô nhiễm", example: "Exhaust fumes from cars pollute the air." }
+            ],
+            12: [
+                { word: "Automatic", ipa: "/ˌɔː.təˈmæt.ɪk/", meaning: "Tự động", example: "The robot has an automatic cleaning system." },
+                { word: "Guard", ipa: "/ɡɑːd/", meaning: "Bảo vệ, canh gác", example: "Robots can guard our houses when we are away." },
+                { word: "Laundry", ipa: "/ˈlɔːn.dri/", meaning: "Việc giặt ủi", example: "The robot helper will do the laundry for you." },
+                { word: "Recognize", ipa: "/ˈrek.əɡ.naɪz/", meaning: "Nhận diện, nhận ra", example: "Modern robots can recognize human faces." },
+                { word: "Space station", ipa: "/ˈspeɪs ˌsteɪ.ʃən/", meaning: "Trạm vũ trụ", example: "Robots are sent to build a space station on Mars." }
+            ]
+        };
+
+        let activeWordsList = [];
+        let currentIndex = 0;
+        let currentGameMode = 'flashcard';
+        let scoreCorrect = 0;
+        let scoreTotal = 0;
+        let isAnswered = false;
+
+        window.onload = function() {
+            handleUnitChange("1"); // Khởi tạo mặc định Unit 1
+        };
+
+        // Hàm xử lý khi thay đổi Thẻ Chọn bài học
+        function handleUnitChange(targetValue) {
+            currentIndex = 0;
+            const card = document.getElementById('card');
+            card.classList.remove('flipped');
+
+            if (targetValue === "all") {
+                // Gộp toàn bộ từ vựng 1-12
+                activeWordsList = [];
+                Object.keys(vocabularyData).forEach(unit => {
+                    activeWordsList.push(...vocabularyData[unit]);
+                });
+                // Trộn ngẫu nhiên danh sách tổng hợp để học không bị nhàm chán
+                activeWordsList.sort(() => Math.random() - 0.5);
+            } else {
+                // Lấy danh sách của riêng bài học được chọn
+                activeWordsList = [...vocabularyData[targetValue]];
+            }
+
+            updateFlashcard();
+            if (currentGameMode === 'quiz') {
+                generateQuizQuestion();
+            }
+        }
+
+        function switchMode(mode) {
+            currentGameMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if (mode === 'flashcard') {
+                document.querySelector('[onclick="switchMode(\'flashcard\')"]').classList.add('active');
+                document.getElementById('flashcard-section').style.display = 'block';
+                document.getElementById('quiz-section').style.display = 'none';
+                updateFlashcard();
+            } else {
+                document.querySelector('[onclick="switchMode(\'quiz\')"]').classList.add('active');
+                document.getElementById('flashcard-section').style.display = 'none';
+                document.getElementById('quiz-section').style.display = 'block';
+                generateQuizQuestion();
+            }
+        }
+
+        function updateFlashcard() {
+            if (activeWordsList.length === 0) return;
+            
+            const currentItem = activeWordsList[currentIndex];
+            document.getElementById('front-word').innerText = currentItem.word;
+            document.getElementById('front-ipa').innerText = currentItem.ipa;
+            document.getElementById('back-meaning').innerText = currentItem.meaning;
+            document.getElementById('back-example').innerText = currentItem.example;
+        }
+
+        function toggleCard() {
+            document.getElementById('card').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            document.getElementById('card').classList.remove('flipped');
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % activeWordsList.length;
+                updateFlashcard();
+            }, 200);
+        }
+
+        function prevCard() {
+            document.getElementById('card').classList.remove('flipped');
+            setTimeout(() => {
+                currentIndex = (currentIndex - 1 + activeWordsList.length) % activeWordsList.length;
+                updateFlashcard();
+            }, 200);
+        }
+
+        function generateQuizQuestion() {
+            isAnswered = false;
+            if (activeWordsList.length === 0) return;
+
+            // Lấy ngẫu nhiên câu hỏi từ danh sách đang active
+            const correctIndex = Math.floor(Math.random() * activeWordsList.length);
+            const correctAnswer = activeWordsList[correctIndex];
+
+            const isIpaQuestion = Math.random() > 0.5;
+            
+            if (isIpaQuestion) {
+                document.getElementById('quiz-label').innerText = "Nhìn phiên âm - Đoán từ vựng đúng:";
+                document.getElementById('quiz-target').innerText = correctAnswer.ipa;
+            } else {
+                document.getElementById('quiz-label').innerText = "Từ vựng này có nghĩa là gì:";
+                document.getElementById('quiz-target').innerText = correctAnswer.word;
+            }
+
+            // Tạo kho đáp án gây nhiễu (Lấy từ toàn bộ 12 Unit để tăng độ phong phú)
+            let allPool = [];
+            Object.keys(vocabularyData).forEach(unit => {
+                vocabularyData[unit].forEach(item => {
+                    if (isIpaQuestion) {
+                        if (item.word !== correctAnswer.word) allPool.push(item.word);
+                    } else {
+                        if (item.meaning !== correctAnswer.meaning) allPool.push(item.meaning);
+                    }
+                });
+            });
+
+            // Loại bỏ phần tử trùng lặp và lấy ra 3 lựa chọn sai ngẫu nhiên
+            allPool = [...new Set(allPool)].sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            let options = [];
+            if (isIpaQuestion) {
+                options = [correctAnswer.word, ...allPool];
+            } else {
+                options = [correctAnswer.meaning, ...allPool];
+            }
+            options = options.sort(() => 0.5 - Math.random());
+
+            const optionsGrid = document.getElementById('options-grid');
+            optionsGrid.innerHTML = '';
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(btn, opt, isIpaQuestion ? correctAnswer.word : correctAnswer.meaning);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedBtn, selectedValue, correctValue) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            scoreTotal++;
+            document.getElementById('total-count').innerText = scoreTotal;
+
+            if (selectedValue === correctValue) {
+                selectedBtn.classList.add('correct');
+                scoreCorrect++;
+                document.getElementById('correct-count').innerText = scoreCorrect;
+            } else {
+                selectedBtn.classList.add('wrong');
+                const buttons = document.querySelectorAll('.option-btn');
+                buttons.forEach(btn => {
+                    if (btn.innerText === correctValue) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            setTimeout(() => {
+                generateQuizQuestion();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
