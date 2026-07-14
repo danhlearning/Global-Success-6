@@ -609,6 +609,18 @@
                     }
                 });
             }
+            function checkAnswer() {
+    const userInput = document.getElementById('answerInput').value.trim().toLowerCase();
+    const correctAnswer = activeWordsList[currentIndex].word.toLowerCase(); // Giả sử cấu trúc dữ liệu của thầy
+    const resultDisplay = document.getElementById('resultDisplay'); // Phần tử hiển thị kết quả
+
+    if (userInput === correctAnswer) {
+        resultDisplay.innerHTML = '<span style="color: green;">Đúng rồi!</span>';
+        // Cộng điểm nếu cần
+    } else {
+        resultDisplay.innerHTML = `<span style="color: red;">Sai rồi! Đáp án là: ${activeWordsList[currentIndex].word}</span>`;
+    }
+}
 
             setTimeout(() => {
                 generateQuizQuestion();
