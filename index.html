@@ -57,7 +57,6 @@
             color: var(--primary);
         }
 
-        /* Unit Selector dạng Thẻ chọn rút gọn */
         .unit-container {
             max-width: 600px;
             width: 100%;
@@ -96,7 +95,6 @@
             border-color: var(--primary);
         }
 
-        /* Game Zone */
         .game-zone {
             max-width: 600px;
             width: 100%;
@@ -105,23 +103,25 @@
             align-items: center;
         }
 
-        /* Mode Tabs */
+        /* Mode Tabs chỉnh lại để chứa đủ 3 nút */
         .mode-tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 20px;
             width: 100%;
         }
 
         .mode-btn {
             flex: 1;
-            padding: 12px;
+            padding: 12px 8px;
             border: none;
             background: #d1d5db;
             font-weight: bold;
+            font-size: 0.9rem;
             border-radius: 10px;
             cursor: pointer;
             transition: background 0.2s;
+            white-space: nowrap;
         }
 
         .mode-btn.active {
@@ -202,7 +202,7 @@
             opacity: 0.9;
         }
 
-        /* Practice Component (Luyện phát âm mới) */
+        /* Common Containers cho các phần Tự luận tự gõ */
         .practice-container {
             background: white;
             width: 100%;
@@ -282,9 +282,29 @@
             font-size: 1.2rem;
             font-weight: bold;
             min-height: 30px;
+            text-align: left;
+            padding: 0 10px;
         }
 
-        /* Navigation Controls */
+        /* Khung hiển thị ví dụ dạng chuyên nghiệp */
+        .example-box {
+            margin-top: 15px;
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            font-weight: normal;
+            color: #334155;
+        }
+
+        .example-box p {
+            margin-bottom: 6px;
+        }
+        .example-box p:last-child {
+            margin-bottom: 0;
+        }
+
         .controls {
             display: flex;
             justify-content: space-between;
@@ -348,10 +368,12 @@
 
     <div class="game-zone">
         <div class="mode-tabs">
-            <button class="mode-btn active" onclick="switchMode('flashcard')">🗂️ Flashcard</button>
-            <button class="mode-btn" onclick="switchMode('practice')">🔊 Luyện phát âm</button>
+            <button class="mode-btn active" id="btn-flashcard" onclick="switchMode('flashcard')">🗂️ Flashcard</button>
+            <button class="mode-btn" id="btn-practice" onclick="switchMode('practice')">🔊 Luyện phát âm</button>
+            <button class="mode-btn" id="btn-meaning" onclick="switchMode('meaning')">Đoán nghĩa</button>
         </div>
 
+        <!-- 1. FLASHCARD SECTION -->
         <div id="flashcard-section" style="width: 100%;">
             <div class="flashcard-wrapper" onclick="toggleCard()">
                 <div class="flashcard" id="card">
@@ -371,19 +393,33 @@
             </div>
         </div>
 
-        <!-- Section Luyện phát âm mới thay thế cho Quiz cũ -->
+        <!-- 2. LUYỆN PHÁT ÂM SECTION -->
         <div id="practice-section" class="practice-container">
             <div class="practice-question">
-                <div class="question-label">Nghe/Nhìn phiên âm đoán từ:</div>
+                <div class="question-label">Nhìn phiên âm đoán từ:</div>
                 <div class="question-text" id="practice-ipa">/.../</div>
                 <div class="question-hint" id="practice-hint">(Nghĩa: ...)</div>
             </div>
             <div class="input-group">
-                <input type="text" id="answerInput" class="answer-input" placeholder="Nhập từ chính xác tại đây..." autocomplete="off">
-                <button class="submit-btn" onclick="checkAnswer()">Kiểm tra (Enter)</button>
+                <input type="text" id="answerInput" class="answer-input" placeholder="Nhập từ tiếng Anh tại đây..." autocomplete="off">
+                <button class="submit-btn" onclick="checkAnswer('practice')">Kiểm tra (Enter)</button>
             </div>
             <div id="resultDisplay" class="result-display"></div>
         </div>
+
+        <!-- 3. ĐOÁN NGHĨA TIẾNG VIỆT SECTION (MỚI THÊM) -->
+        <div id="meaning-section" class="practice-container">
+            <div class="practice-question">
+                <div class="question-label">Nhìn nghĩa Tiếng Việt đoán từ:</div>
+                <div class="question-text" id="meaning-vietnamese" style="font-size: 1.8rem; color: #E67E22;">...</div>
+            </div>
+            <div class="input-group">
+                <input type="text" id="meaningInput" class="answer-input" placeholder="Nhập chính xác từ Tiếng Anh..." autocomplete="off">
+                <button class="submit-btn" onclick="checkAnswer('meaning')">Kiểm tra (Enter)</button>
+            </div>
+            <div id="meaningResultDisplay" class="result-display"></div>
+        </div>
+
     </div>
 
     <div class="footer-note">💡 Thiết kế bài học thông minh cùng thầy Danh English</div>
@@ -431,7 +467,7 @@
                 { word: "Apricot blossom", ipa: "/ˈeɪ.prɪ.kɒt ˈblɒs.əm/", meaning: "Hoa mai", example: "Southern people prefer decorating with apricot blossoms." },
                 { word: "Lucky money", ipa: "/ˈlʌk.i ˈmʌn.i/", meaning: "Tiền lì xì", example: "Children look forward to receiving lucky money." },
                 { word: "Fireworks", ipa: "/ˈfaɪə.wɜːks/", meaning: "Pháo hoa", example: "We watch the fireworks display at midnight." },
-                { word: "Gather", ipa: "/ˈɡæð.ər/", meaning: "Quây quản, tụ họp", example: "Family members gather to make Chung cake." }
+                { word: "Gather", ipa: "/ˈɡæð.ər/", meaning: "Quây quần, tụ họp", example: "Family members gather to make Chung cake." }
             ],
             7: [
                 { word: "Comedy", ipa: "/ˈkɒm.ə.di/", meaning: "Phim hài", example: "We laughed a lot while watching that comedy." },
@@ -456,7 +492,7 @@
             ],
             10: [
                 { word: "Wireless", ipa: "/ˈwaɪə.ləs/", meaning: "Không dây", example: "The internet connection is completely wireless." },
-                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
+                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
                 { word: "Solar energy", ipa: "/ˌsəʊ.lər ˈen.ə.dʒi/", meaning: "Năng lượng mặt trời", example: "Our future house will run on solar energy." },
                 { word: "Skyscraper", ipa: "/ˈskaɪˌskreɪ.pər/", meaning: "Nhà chọc trời", example: "There are many skyscrapers in New York City." },
                 { word: "Spaceboat", ipa: "/ˈspeɪs.bəʊt/", meaning: "Tàu vũ trụ", example: "We might travel by spaceboat in the future." }
@@ -483,20 +519,21 @@
         let scoreCorrect = 0;
         let scoreTotal = 0;
         let isAnswered = false;
-        let currentPracticeWord = null;
+        let currentWordItem = null;
 
         window.onload = function() {
-            handleUnitChange("1"); // Khởi tạo mặc định Unit 1
+            handleUnitChange("1"); 
             
-            // Lắng nghe sự kiện nhấn phím Enter trên ô nhập liệu
+            // Lắng nghe sự kiện phím Enter cho cả hai ô nhập liệu
             document.getElementById('answerInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkAnswer();
-                }
+                if (e.key === 'Enter') checkAnswer('practice');
+            });
+
+            document.getElementById('meaningInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') checkAnswer('meaning');
             });
         };
 
-        // Hàm xử lý khi thay đổi Thẻ Chọn bài học
         function handleUnitChange(targetValue) {
             currentIndex = 0;
             const card = document.getElementById('card');
@@ -513,31 +550,36 @@
             }
 
             updateFlashcard();
-            if (currentGameMode === 'practice') {
-                generatePracticeQuestion();
-            }
+            if (currentGameMode === 'practice') generatePracticeQuestion();
+            if (currentGameMode === 'meaning') generateMeaningQuestion();
         }
 
         function switchMode(mode) {
             currentGameMode = mode;
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             
+            // Ẩn toàn bộ các section
+            document.getElementById('flashcard-section').style.display = 'none';
+            document.getElementById('practice-section').style.display = 'none';
+            document.getElementById('meaning-section').style.display = 'none';
+
             if (mode === 'flashcard') {
-                document.querySelector('[onclick="switchMode(\'flashcard\')"]').classList.add('active');
+                document.getElementById('btn-flashcard').classList.add('active');
                 document.getElementById('flashcard-section').style.display = 'block';
-                document.getElementById('practice-section').style.display = 'none';
                 updateFlashcard();
-            } else {
-                document.querySelector('[onclick="switchMode(\'practice\')"]').classList.add('active');
-                document.getElementById('flashcard-section').style.display = 'none';
+            } else if (mode === 'practice') {
+                document.getElementById('btn-practice').classList.add('active');
                 document.getElementById('practice-section').style.display = 'block';
                 generatePracticeQuestion();
+            } else if (mode === 'meaning') {
+                document.getElementById('btn-meaning').classList.add('active');
+                document.getElementById('meaning-section').style.display = 'block';
+                generateMeaningQuestion();
             }
         }
 
         function updateFlashcard() {
             if (activeWordsList.length === 0) return;
-            
             const currentItem = activeWordsList[currentIndex];
             document.getElementById('front-word').innerText = currentItem.word;
             document.getElementById('front-ipa').innerText = currentItem.ipa;
@@ -545,40 +587,27 @@
             document.getElementById('back-example').innerText = currentItem.example;
         }
 
-        function toggleCard() {
-            document.getElementById('card').classList.toggle('flipped');
-        }
-
+        function toggleCard() { document.getElementById('card').classList.toggle('flipped'); }
         function nextCard() {
             document.getElementById('card').classList.remove('flipped');
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % activeWordsList.length;
-                updateFlashcard();
-            }, 200);
+            setTimeout(() => { currentIndex = (currentIndex + 1) % activeWordsList.length; updateFlashcard(); }, 200);
         }
-
         function prevCard() {
             document.getElementById('card').classList.remove('flipped');
-            setTimeout(() => {
-                currentIndex = (currentIndex - 1 + activeWordsList.length) % activeWordsList.length;
-                updateFlashcard();
-            }, 200);
+            setTimeout(() => { currentIndex = (currentIndex - 1 + activeWordsList.length) % activeWordsList.length; updateFlashcard(); }, 200);
         }
 
-        // Tạo câu hỏi phần Luyện phát âm mới
+        // 2. Hàm sinh câu hỏi phần LUYỆN PHÁT ÂM
         function generatePracticeQuestion() {
             isAnswered = false;
             if (activeWordsList.length === 0) return;
 
-            // Lấy ngẫu nhiên một từ trong danh sách đang chọn
             const randomIndex = Math.floor(Math.random() * activeWordsList.length);
-            currentPracticeWord = activeWordsList[randomIndex];
+            currentWordItem = activeWordsList[randomIndex];
 
-            // Cập nhật giao diện câu hỏi
-            document.getElementById('practice-ipa').innerText = currentPracticeWord.ipa;
-            document.getElementById('practice-hint').innerText = `(Nghĩa: ${currentPracticeWord.meaning})`;
+            document.getElementById('practice-ipa').innerText = currentWordItem.ipa;
+            document.getElementById('practice-hint').innerText = `(Nghĩa: ${currentWordItem.meaning})`;
             
-            // Reset ô nhập và thông báo kết quả
             const inputField = document.getElementById('answerInput');
             inputField.value = '';
             inputField.disabled = false;
@@ -586,37 +615,72 @@
             document.getElementById('resultDisplay').innerHTML = '';
         }
 
-        // Hàm kiểm tra đáp án tự luận khi nhấn Enter / Click button
-        function checkAnswer() {
-            if (isAnswered || !currentPracticeWord) return;
+        // 3. Hàm sinh câu hỏi phần ĐOÁN NGHĨA TIẾNG VIỆT
+        function generateMeaningQuestion() {
+            isAnswered = false;
+            if (activeWordsList.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * activeWordsList.length);
+            currentWordItem = activeWordsList[randomIndex];
+
+            document.getElementById('meaning-vietnamese').innerText = currentWordItem.meaning;
             
-            const inputField = document.getElementById('answerInput');
+            const inputField = document.getElementById('meaningInput');
+            inputField.value = '';
+            inputField.disabled = false;
+            inputField.focus();
+            document.getElementById('meaningResultDisplay').innerHTML = '';
+        }
+
+        // Tạo câu ví dụ thứ 2 bổ trợ tự động dựa trên từ vựng
+        function generateSecondExample(word) {
+            return `Please look up the definition of "${word}" if you do not understand it.`;
+        }
+
+        // Hàm xử lý kiểm tra kết quả chung cho cả 2 chế độ tự luận
+        function checkAnswer(mode) {
+            if (isAnswered || !currentWordItem) return;
+            
+            const inputId = mode === 'practice' ? 'answerInput' : 'meaningInput';
+            const displayId = mode === 'practice' ? 'resultDisplay' : 'meaningResultDisplay';
+            
+            const inputField = document.getElementById(inputId);
+            const resultDisplay = document.getElementById(displayId);
+            
             const userInput = inputField.value.trim().toLowerCase();
-            const correctAnswer = currentPracticeWord.word.trim().toLowerCase();
-            const resultDisplay = document.getElementById('resultDisplay');
+            const correctAnswer = currentWordItem.word.trim().toLowerCase();
 
             if (userInput === "") {
-                resultDisplay.innerHTML = '<span style="color: #e67e22;">Vui lòng nhập từ trước khi kiểm tra!</span>';
+                resultDisplay.innerHTML = '<span style="color: #e67e22;">Vui lòng nhập đáp án trước!</span>';
                 return;
             }
 
             isAnswered = true;
-            inputField.disabled = true; // Khóa input tạm thời để tránh spam
+            inputField.disabled = true;
             scoreTotal++;
             document.getElementById('total-count').innerText = scoreTotal;
 
+            // Xây dựng khối hiển thị 2 ví dụ
+            const exampleHTML = `
+                <div class="example-box">
+                    <p><strong>Ví dụ 1:</strong> ${currentWordItem.example}</p>
+                    <p><strong>Ví dụ 2:</strong> ${generateSecondExample(currentWordItem.word)}</p>
+                </div>
+            `;
+
             if (userInput === correctAnswer) {
-                resultDisplay.innerHTML = '<span style="color: var(--secondary);">🎉 Chính xác! Xuất sắc!</span>';
+                resultDisplay.innerHTML = `<span style="color: var(--secondary);">🎉 Đúng rồi! Xuất sắc!</span>` + exampleHTML;
                 scoreCorrect++;
                 document.getElementById('correct-count').innerText = scoreCorrect;
             } else {
-                resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa đúng rồi! Đáp án chính xác là: <strong style="font-size: 1.4rem;">${currentPracticeWord.word}</strong></span>`;
+                resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa chính xác! Đáp án là: <strong style="font-size: 1.4rem;">${currentWordItem.word}</strong></span>` + exampleHTML;
             }
 
-            // Tự động chuyển sang câu tiếp theo sau 2 giây
+            // Kéo dài thời gian chuyển câu lên 6 giây để học sinh kịp đọc 2 câu ví dụ
             setTimeout(() => {
-                generatePracticeQuestion();
-            }, 2200);
+                if (mode === 'practice') generatePracticeQuestion();
+                if (mode === 'meaning') generateMeaningQuestion();
+            }, 6000);
         }
     </script>
 </body>
