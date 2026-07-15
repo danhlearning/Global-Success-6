@@ -202,18 +202,18 @@
             opacity: 0.9;
         }
 
-        /* Quiz Component */
-        .quiz-container {
+        /* Practice Component (Luyện phát âm mới) */
+        .practice-container {
             background: white;
             width: 100%;
             padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             display: none;
+            text-align: center;
         }
 
-        .quiz-question {
-            text-align: center;
+        .practice-question {
             margin-bottom: 20px;
         }
 
@@ -225,44 +225,63 @@
         }
 
         .question-text {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: var(--primary);
+            margin-bottom: 5px;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
+        .question-hint {
+            font-size: 1.1rem;
+            color: #555;
+            font-style: italic;
         }
 
-        .option-btn {
-            background: var(--light);
-            border: 2px solid #e2e8f0;
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .answer-input {
+            width: 100%;
             padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            outline: none;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            transition: border-color 0.2s;
+        }
+
+        .answer-input:focus {
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            font-size: 1.05rem;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #357ABD;
+        }
+
+        .result-display {
+            margin-top: 20px;
+            font-size: 1.2rem;
             font-weight: bold;
-            text-align: left;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover {
-            background: #edf2f7;
-            border-color: #cbd5e1;
-        }
-
-        .option-btn.correct {
-            background: #d4edda;
-            border-color: var(--secondary);
-            color: #155724;
-        }
-
-        .option-btn.wrong {
-            background: #f8d7da;
-            border-color: var(--danger);
-            color: #721c24;
+            min-height: 30px;
         }
 
         /* Navigation Controls */
@@ -330,7 +349,7 @@
     <div class="game-zone">
         <div class="mode-tabs">
             <button class="mode-btn active" onclick="switchMode('flashcard')">🗂️ Flashcard</button>
-            <button class="mode-btn" onclick="switchMode('quiz')">📝 Trắc nghiệm IPA</button>
+            <button class="mode-btn" onclick="switchMode('practice')">🔊 Luyện phát âm</button>
         </div>
 
         <div id="flashcard-section" style="width: 100%;">
@@ -352,13 +371,18 @@
             </div>
         </div>
 
-        <div id="quiz-section" class="quiz-container">
-            <div class="quiz-question">
-                <div class="question-label" id="quiz-label">Nhìn phiên âm đoán từ:</div>
-                <div class="question-text" id="quiz-target">/.../</div>
+        <!-- Section Luyện phát âm mới thay thế cho Quiz cũ -->
+        <div id="practice-section" class="practice-container">
+            <div class="practice-question">
+                <div class="question-label">Nghe/Nhìn phiên âm đoán từ:</div>
+                <div class="question-text" id="practice-ipa">/.../</div>
+                <div class="question-hint" id="practice-hint">(Nghĩa: ...)</div>
             </div>
-            <div class="options-grid" id="options-grid">
-                </div>
+            <div class="input-group">
+                <input type="text" id="answerInput" class="answer-input" placeholder="Nhập từ chính xác tại đây..." autocomplete="off">
+                <button class="submit-btn" onclick="checkAnswer()">Kiểm tra (Enter)</button>
+            </div>
+            <div id="resultDisplay" class="result-display"></div>
         </div>
     </div>
 
@@ -407,7 +431,7 @@
                 { word: "Apricot blossom", ipa: "/ˈeɪ.prɪ.kɒt ˈblɒs.əm/", meaning: "Hoa mai", example: "Southern people prefer decorating with apricot blossoms." },
                 { word: "Lucky money", ipa: "/ˈlʌk.i ˈmʌn.i/", meaning: "Tiền lì xì", example: "Children look forward to receiving lucky money." },
                 { word: "Fireworks", ipa: "/ˈfaɪə.wɜːks/", meaning: "Pháo hoa", example: "We watch the fireworks display at midnight." },
-                { word: "Gather", ipa: "/ˈɡæð.ər/", meaning: "Quây quần, tụ họp", example: "Family members gather to make Chung cake." }
+                { word: "Gather", ipa: "/ˈɡæð.ər/", meaning: "Quây quản, tụ họp", example: "Family members gather to make Chung cake." }
             ],
             7: [
                 { word: "Comedy", ipa: "/ˈkɒm.ə.di/", meaning: "Phim hài", example: "We laughed a lot while watching that comedy." },
@@ -432,7 +456,7 @@
             ],
             10: [
                 { word: "Wireless", ipa: "/ˈwaɪə.ləs/", meaning: "Không dây", example: "The internet connection is completely wireless." },
-                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
+                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
                 { word: "Solar energy", ipa: "/ˌsəʊ.lər ˈen.ə.dʒi/", meaning: "Năng lượng mặt trời", example: "Our future house will run on solar energy." },
                 { word: "Skyscraper", ipa: "/ˈskaɪˌskreɪ.pər/", meaning: "Nhà chọc trời", example: "There are many skyscrapers in New York City." },
                 { word: "Spaceboat", ipa: "/ˈspeɪs.bəʊt/", meaning: "Tàu vũ trụ", example: "We might travel by spaceboat in the future." }
@@ -459,9 +483,17 @@
         let scoreCorrect = 0;
         let scoreTotal = 0;
         let isAnswered = false;
+        let currentPracticeWord = null;
 
         window.onload = function() {
             handleUnitChange("1"); // Khởi tạo mặc định Unit 1
+            
+            // Lắng nghe sự kiện nhấn phím Enter trên ô nhập liệu
+            document.getElementById('answerInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkAnswer();
+                }
+            });
         };
 
         // Hàm xử lý khi thay đổi Thẻ Chọn bài học
@@ -471,21 +503,18 @@
             card.classList.remove('flipped');
 
             if (targetValue === "all") {
-                // Gộp toàn bộ từ vựng 1-12
                 activeWordsList = [];
                 Object.keys(vocabularyData).forEach(unit => {
                     activeWordsList.push(...vocabularyData[unit]);
                 });
-                // Trộn ngẫu nhiên danh sách tổng hợp để học không bị nhàm chán
                 activeWordsList.sort(() => Math.random() - 0.5);
             } else {
-                // Lấy danh sách của riêng bài học được chọn
                 activeWordsList = [...vocabularyData[targetValue]];
             }
 
             updateFlashcard();
-            if (currentGameMode === 'quiz') {
-                generateQuizQuestion();
+            if (currentGameMode === 'practice') {
+                generatePracticeQuestion();
             }
         }
 
@@ -496,13 +525,13 @@
             if (mode === 'flashcard') {
                 document.querySelector('[onclick="switchMode(\'flashcard\')"]').classList.add('active');
                 document.getElementById('flashcard-section').style.display = 'block';
-                document.getElementById('quiz-section').style.display = 'none';
+                document.getElementById('practice-section').style.display = 'none';
                 updateFlashcard();
             } else {
-                document.querySelector('[onclick="switchMode(\'quiz\')"]').classList.add('active');
+                document.querySelector('[onclick="switchMode(\'practice\')"]').classList.add('active');
                 document.getElementById('flashcard-section').style.display = 'none';
-                document.getElementById('quiz-section').style.display = 'block';
-                generateQuizQuestion();
+                document.getElementById('practice-section').style.display = 'block';
+                generatePracticeQuestion();
             }
         }
 
@@ -536,95 +565,58 @@
             }, 200);
         }
 
-        function generateQuizQuestion() {
+        // Tạo câu hỏi phần Luyện phát âm mới
+        function generatePracticeQuestion() {
             isAnswered = false;
             if (activeWordsList.length === 0) return;
 
-            // Lấy ngẫu nhiên câu hỏi từ danh sách đang active
-            const correctIndex = Math.floor(Math.random() * activeWordsList.length);
-            const correctAnswer = activeWordsList[correctIndex];
+            // Lấy ngẫu nhiên một từ trong danh sách đang chọn
+            const randomIndex = Math.floor(Math.random() * activeWordsList.length);
+            currentPracticeWord = activeWordsList[randomIndex];
 
-            const isIpaQuestion = Math.random() > 0.5;
+            // Cập nhật giao diện câu hỏi
+            document.getElementById('practice-ipa').innerText = currentPracticeWord.ipa;
+            document.getElementById('practice-hint').innerText = `(Nghĩa: ${currentPracticeWord.meaning})`;
             
-            if (isIpaQuestion) {
-                document.getElementById('quiz-label').innerText = "Nhìn phiên âm - Đoán từ vựng đúng:";
-                document.getElementById('quiz-target').innerText = correctAnswer.ipa;
-            } else {
-                document.getElementById('quiz-label').innerText = "Từ vựng này có nghĩa là gì:";
-                document.getElementById('quiz-target').innerText = correctAnswer.word;
-            }
-
-            // Tạo kho đáp án gây nhiễu (Lấy từ toàn bộ 12 Unit để tăng độ phong phú)
-            let allPool = [];
-            Object.keys(vocabularyData).forEach(unit => {
-                vocabularyData[unit].forEach(item => {
-                    if (isIpaQuestion) {
-                        if (item.word !== correctAnswer.word) allPool.push(item.word);
-                    } else {
-                        if (item.meaning !== correctAnswer.meaning) allPool.push(item.meaning);
-                    }
-                });
-            });
-
-            // Loại bỏ phần tử trùng lặp và lấy ra 3 lựa chọn sai ngẫu nhiên
-            allPool = [...new Set(allPool)].sort(() => 0.5 - Math.random()).slice(0, 3);
-            
-            let options = [];
-            if (isIpaQuestion) {
-                options = [correctAnswer.word, ...allPool];
-            } else {
-                options = [correctAnswer.meaning, ...allPool];
-            }
-            options = options.sort(() => 0.5 - Math.random());
-
-            const optionsGrid = document.getElementById('options-grid');
-            optionsGrid.innerHTML = '';
-
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkQuizAnswer(btn, opt, isIpaQuestion ? correctAnswer.word : correctAnswer.meaning);
-                optionsGrid.appendChild(btn);
-            });
+            // Reset ô nhập và thông báo kết quả
+            const inputField = document.getElementById('answerInput');
+            inputField.value = '';
+            inputField.disabled = false;
+            inputField.focus();
+            document.getElementById('resultDisplay').innerHTML = '';
         }
 
-        function checkQuizAnswer(selectedBtn, selectedValue, correctValue) {
-            if (isAnswered) return;
-            isAnswered = true;
+        // Hàm kiểm tra đáp án tự luận khi nhấn Enter / Click button
+        function checkAnswer() {
+            if (isAnswered || !currentPracticeWord) return;
+            
+            const inputField = document.getElementById('answerInput');
+            const userInput = inputField.value.trim().toLowerCase();
+            const correctAnswer = currentPracticeWord.word.trim().toLowerCase();
+            const resultDisplay = document.getElementById('resultDisplay');
 
+            if (userInput === "") {
+                resultDisplay.innerHTML = '<span style="color: #e67e22;">Vui lòng nhập từ trước khi kiểm tra!</span>';
+                return;
+            }
+
+            isAnswered = true;
+            inputField.disabled = true; // Khóa input tạm thời để tránh spam
             scoreTotal++;
             document.getElementById('total-count').innerText = scoreTotal;
 
-            if (selectedValue === correctValue) {
-                selectedBtn.classList.add('correct');
+            if (userInput === correctAnswer) {
+                resultDisplay.innerHTML = '<span style="color: var(--secondary);">🎉 Chính xác! Xuất sắc!</span>';
                 scoreCorrect++;
                 document.getElementById('correct-count').innerText = scoreCorrect;
             } else {
-                selectedBtn.classList.add('wrong');
-                const buttons = document.querySelectorAll('.option-btn');
-                buttons.forEach(btn => {
-                    if (btn.innerText === correctValue) {
-                        btn.classList.add('correct');
-                    }
-                });
+                resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa đúng rồi! Đáp án chính xác là: <strong style="font-size: 1.4rem;">${currentPracticeWord.word}</strong></span>`;
             }
-            function checkAnswer() {
-    const userInput = document.getElementById('answerInput').value.trim().toLowerCase();
-    const correctAnswer = activeWordsList[currentIndex].word.toLowerCase(); // Giả sử cấu trúc dữ liệu của thầy
-    const resultDisplay = document.getElementById('resultDisplay'); // Phần tử hiển thị kết quả
 
-    if (userInput === correctAnswer) {
-        resultDisplay.innerHTML = '<span style="color: green;">Đúng rồi!</span>';
-        // Cộng điểm nếu cần
-    } else {
-        resultDisplay.innerHTML = `<span style="color: red;">Sai rồi! Đáp án là: ${activeWordsList[currentIndex].word}</span>`;
-    }
-}
-
+            // Tự động chuyển sang câu tiếp theo sau 2 giây
             setTimeout(() => {
-                generateQuizQuestion();
-            }, 1500);
+                generatePracticeQuestion();
+            }, 2200);
         }
     </script>
 </body>
