@@ -38,7 +38,7 @@
 
         header h1 {
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 1.5rem;
             margin-bottom: 5px;
         }
 
@@ -71,7 +71,7 @@
         }
 
         .unit-label {
-            font-size: 1rem;
+            font-size: 0.6rem;
             font-weight: 700;
             color: var(--dark);
         }
@@ -117,7 +117,7 @@
             border: none;
             background: #d1d5db;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             border-radius: 10px;
             cursor: pointer;
             transition: background 0.2s;
@@ -177,13 +177,13 @@
         }
 
         .card-word {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: var(--dark);
             margin-bottom: 10px;
         }
 
         .card-ipa {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #7f8c8d;
             background: #f1f2f6;
             padding: 4px 15px;
@@ -198,7 +198,7 @@
 
         .card-example {
             font-style: italic;
-            font-size: 1rem;
+            font-size: 0.8rem;
             opacity: 0.9;
         }
 
@@ -266,7 +266,7 @@
             color: white;
             border: none;
             padding: 15px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
@@ -279,7 +279,7 @@
 
         .result-display {
             margin-top: 20px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             min-height: 30px;
             text-align: left;
@@ -1001,11 +1001,11 @@
                 resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa chính xác! Đáp án là: <strong style="font-size: 1.4rem;">${currentWordItem.word}</strong></span>` + exampleHTML;
             }
 
-            // Kéo dài thời gian chuyển câu lên 6 giây để học sinh kịp đọc 2 câu ví dụ
+            // Kéo dài thời gian chuyển câu lên 4 giây để học sinh kịp đọc 2 câu ví dụ
             setTimeout(() => {
                 if (mode === 'practice') generatePracticeQuestion();
                 if (mode === 'meaning') generateMeaningQuestion();
-            }, 6000);
+            }, 4000);
         }
     </script>
 </body>
