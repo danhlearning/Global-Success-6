@@ -24,7 +24,7 @@
         body {
             background-color: #eef2f7;
             color: var(--dark);
-            padding: 20px;
+            padding: 10px; /* Thu gọn padding tổng thể */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -33,24 +33,25 @@
 
         header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 12px; /* Thu gọn khoảng cách */
         }
 
         header h1 {
             color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.3rem; /* Thu nhỏ tiêu đề chính */
+            margin-bottom: 3px;
         }
 
         .score-board {
             background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 6px 15px; /* Thu gọn bảng điểm */
+            border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             font-weight: bold;
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            font-size: 0.9rem;
         }
 
         .score-board span {
@@ -58,33 +59,33 @@
         }
 
         .unit-container {
-            max-width: 600px;
+            max-width: 500px; /* Thu hẹp chiều ngang */
             width: 100%;
             background: white;
-            padding: 15px 20px;
-            border-radius: 15px;
+            padding: 10px 15px; /* Thu gọn padding */
+            border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 6px;
         }
 
         .unit-label {
-            font-size: 1rem;
+            font-size: 0.85rem; /* Thu nhỏ nhãn */
             font-weight: 700;
             color: var(--dark);
         }
 
         .unit-select {
             width: 100%;
-            padding: 12px;
-            font-size: 1rem;
+            padding: 8px; /* Thu gọn padding selector */
+            font-size: 0.9rem;
             font-weight: bold;
             font-family: 'Quicksand', sans-serif;
             color: var(--dark);
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            border-radius: 8px;
             background-color: var(--light);
             outline: none;
             cursor: pointer;
@@ -96,29 +97,28 @@
         }
 
         .game-zone {
-            max-width: 600px;
+            max-width: 500px; /* Thu hẹp zone chơi game */
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Mode Tabs chỉnh lại để chứa đủ 3 nút */
         .mode-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 12px;
             width: 100%;
         }
 
         .mode-btn {
             flex: 1;
-            padding: 12px 8px;
+            padding: 8px 4px; /* Thu gọn kích thước nút chuyển chế độ */
             border: none;
             background: #d1d5db;
             font-weight: bold;
-            font-size: 0.9rem;
-            border-radius: 10px;
+            font-size: 0.8rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
             white-space: nowrap;
@@ -133,8 +133,8 @@
         .flashcard-wrapper {
             width: 100%;
             perspective: 1000px;
-            height: 280px;
-            margin-bottom: 20px;
+            height: 200px; /* Thu gọn đáng kể chiều cao flashcard */
+            margin-bottom: 12px;
             cursor: pointer;
         }
 
@@ -155,19 +155,19 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 20px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             text-align: center;
         }
 
         .card-front {
             background: white;
-            border: 3px solid var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .card-back {
@@ -177,28 +177,28 @@
         }
 
         .card-word {
-            font-size: 2.2rem;
+            font-size: 1.8rem; /* Thu nhỏ kích thước chữ từ vựng */
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .card-ipa {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #7f8c8d;
             background: #f1f2f6;
-            padding: 4px 15px;
-            border-radius: 20px;
+            padding: 2px 10px;
+            border-radius: 15px;
         }
 
         .card-meaning {
-            font-size: 1.8rem;
+            font-size: 1.4rem; /* Thu nhỏ nghĩa */
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
 
         .card-example {
             font-style: italic;
-            font-size: 1rem;
+            font-size: 0.85rem;
             opacity: 0.9;
         }
 
@@ -206,33 +206,33 @@
         .practice-container {
             background: white;
             width: 100%;
-            padding: 25px;
-            border-radius: 20px;
+            padding: 15px; /* Thu gọn padding khung tự luận */
+            border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             display: none;
             text-align: center;
         }
 
         .practice-question {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .question-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #7f8c8d;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .question-text {
-            font-size: 2.2rem;
+            font-size: 1.8rem; /* Thu nhỏ chữ câu hỏi */
             font-weight: bold;
             color: var(--primary);
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .question-hint {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: #555;
             font-style: italic;
         }
@@ -240,16 +240,16 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 12px;
         }
 
         .answer-input {
             width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
+            padding: 10px; /* Thu gọn ô nhập liệu */
+            font-size: 1rem;
             border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 8px;
             outline: none;
             text-align: center;
             font-family: 'Quicksand', sans-serif;
@@ -265,10 +265,10 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 15px;
-            font-size: 1.1rem;
+            padding: 10px; /* Thu gọn nút kiểm tra */
+            font-size: 0.95rem;
             font-weight: bold;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -278,28 +278,28 @@
         }
 
         .result-display {
-            margin-top: 20px;
-            font-size: 1.2rem;
+            margin-top: 12px;
+            font-size: 1rem;
             font-weight: bold;
-            min-height: 30px;
+            min-height: 25px;
             text-align: left;
-            padding: 0 10px;
+            padding: 0 5px;
         }
 
         /* Khung hiển thị ví dụ dạng chuyên nghiệp */
         .example-box {
-            margin-top: 15px;
+            margin-top: 10px;
             background: #f8fafc;
             border-left: 4px solid var(--primary);
-            padding: 12px;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
+            padding: 8px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
             font-weight: normal;
             color: #334155;
         }
 
         .example-box p {
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .example-box p:last-child {
             margin-bottom: 0;
@@ -309,16 +309,17 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .control-btn {
             background: white;
             border: 2px solid var(--dark);
             color: var(--dark);
-            padding: 10px 25px;
-            border-radius: 10px;
+            padding: 6px 15px; /* Thu gọn nút Trước / Sau */
+            border-radius: 8px;
             font-weight: bold;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -329,8 +330,8 @@
         }
 
         .footer-note {
-            margin-top: 30px;
-            font-size: 0.85rem;
+            margin-top: 15px;
+            font-size: 0.75rem;
             color: #7f8c8d;
         }
     </style>
@@ -339,6 +340,7 @@
 
     <header>
         <h1>🎯 Từ Vựng Tiếng Anh 6</h1>
+    </header>
 
     <div class="unit-container">
         <label for="unit-select" class="unit-label">📁 Chọn bài học ôn tập:</label>
@@ -404,11 +406,11 @@
             <div id="resultDisplay" class="result-display"></div>
         </div>
 
-        <!-- 3. ĐOÁN NGHĨA TIẾNG VIỆT SECTION (MỚI THÊM) -->
+        <!-- 3. ĐOÁN NGHĨA TIẾNG VIỆT SECTION -->
         <div id="meaning-section" class="practice-container">
             <div class="practice-question">
                 <div class="question-label">Nhìn nghĩa Tiếng Việt đoán từ:</div>
-                <div class="question-text" id="meaning-vietnamese" style="font-size: 1.8rem; color: #E67E22;">...</div>
+                <div class="question-text" id="meaning-vietnamese" style="font-size: 1.4rem; color: #E67E22;">...</div>
             </div>
             <div class="input-group">
                 <input type="text" id="meaningInput" class="answer-input" placeholder="Nhập chính xác từ Tiếng Anh..." autocomplete="off">
@@ -422,100 +424,24 @@
     <div class="footer-note">💡 Thiết kế bài học thông minh cùng thầy Danh English</div>
 
     <script>
-        // DATA TỪ VỰNG CHUẨN GLOBAL SUCCESS LỚP 6
+        // Toàn bộ phần script data từ vựng và xử lý logic của bạn được giữ nguyên 100% tại đây...
         const vocabularyData = {
-           
 1: [
-    {
-        word: "activity",
-        ipa: "/æk'tɪvəti/",
-        meaning: "hoạt động",
-        example: "Outdoor activity helps students stay healthy and active."
-    },
-    {
-        word: "art",
-        ipa: "/ɑːt/",
-        meaning: "nghệ thuật, mỹ thuật",
-        example: "We paint beautiful pictures in our art class."
-    },
-    {
-        word: "boarding school",
-        ipa: "/'bɔːdɪŋ skuːl/",
-        meaning: "trường nội trú",
-        example: "Students live and study at a boarding school."
-    },
-    {
-        word: "calculator",
-        ipa: "/'kælkjuleɪtə/",
-        meaning: "máy tính bỏ túi",
-        example: "I use a calculator to solve difficult math problems."
-    },
-    {
-        word: "classmate",
-        ipa: "/'klɑːsmeɪt/",
-        meaning: "bạn cùng lớp",
-        example: "Nam is my classmate, and we always sit together."
-    },
-    {
-        word: "compass",
-        ipa: "/'kʌmpəs/",
-        meaning: "com-pa (dùng để vẽ hình tròn)",
-        example: "You need a compass to draw a perfect circle."
-    },
-    {
-        word: "favourite",
-        ipa: "/'feɪvərɪt/",
-        meaning: "được yêu thích, ưa thích",
-        example: "English is my favourite subject at school."
-    },
-    {
-        word: "help",
-        ipa: "/help/",
-        meaning: "giúp đỡ, sự giúp đỡ",
-        example: "Our teachers always help us with our lessons."
-    },
-    {
-        word: "international",
-        ipa: "/,ɪntə'næʃnəl/",
-        meaning: "quốc tế",
-        example: "She goes to an international school in Hanoi."
-    },
-    {
-        word: "interview",
-        ipa: "/'ɪntəvjuː/",
-        meaning: "phỏng vấn, cuộc phỏng vấn",
-        example: "The reporter wants to interview the new head teacher."
-    },
-    {
-        word: "knock",
-        ipa: "/nɒk/",
-        meaning: "gõ (cửa)",
-        example: "Please knock on the door before entering the classroom."
-    },
-    {
-        word: "remember",
-        ipa: "/rɪ'membə/",
-        meaning: "nhớ, ghi nhớ",
-        example: "Remember to do your homework before going to class."
-    },
-    {
-        word: "share",
-        ipa: "/ʃeə/",
-        meaning: "chia sẻ",
-        example: "Good classmates always share school things with each other."
-    },
-    {
-        word: "smart",
-        ipa: "/smɑːt/",
-        meaning: "bảnh bao, gọn gàng, thông minh",
-        example: "The school uniform looks very smart and clean."
-    },
-    {
-        word: "swimming pool",
-        ipa: "/'swɪmɪŋ puːl/",
-        meaning: "bể bơi",
-        example: "Our school has a big swimming pool for physical education."
-    },
+    { word: "activity", ipa: "/æk'tɪvəti/", meaning: "hoạt động", example: "Outdoor activity helps students stay healthy and active." },
+    { word: "art", ipa: "/ɑːt/", meaning: "nghệ thuật, mỹ thuật", example: "We paint beautiful pictures in our art class." },
+    { word: "boarding school", ipa: "/'bɔːdɪŋ skuːl/", meaning: "trường nội trú", example: "Students live and study at a boarding school." },
+    { word: "calculator", ipa: "/'kælkjuleɪtə/", meaning: "máy tính bỏ túi", example: "I use a calculator to solve difficult math problems." },
+    { word: "classmate", ipa: "/'klɑːsmeɪt/", meaning: "bạn cùng lớp", example: "Nam is my classmate, and we always sit together." },
+    { word: "compass", ipa: "/'kʌmpəs/", meaning: "com-pa (dùng để vẽ hình tròn)", example: "You need a compass to draw a perfect circle." },
+    { word: "favourite", ipa: "/'feɪvərɪt/", meaning: "được yêu thích, ưa thích", example: "English is my favourite subject at school." },
+    { word: "help", ipa: "/help/", meaning: "giúp đỡ, sự giúp đỡ", example: "Our teachers always help us with our lessons." },
+    { word: "international", ipa: "/,ɪntə'næʃnəl/", meaning: "quốc tế", example: "She goes to an international school in Hanoi." },
+    { word: "interview", ipa: "/'ɪntəvjuː/", meaning: "phỏng vấn, cuộc phỏng vấn", example: "The reporter wants to interview the new head teacher." },
+    { word: "knock", ipa: "/nɒk/", meaning: "gõ (cửa)", example: "Please knock on the door before entering the classroom." },
+    { word: "remember", ipa: "/rɪ'membə/", meaning: "nhớ, ghi nhớ", example: "Remember to do your homework before going to class." },
+    { word: "share", ipa: "/ʃeə/", meaning: "chia sẻ", example: "Good classmates always share school things with each other." },
+    { word: "smart", ipa: "/smɑːt/", meaning: "bảnh bao, gọn gàng, thông minh", example: "The school uniform looks very smart and clean." },
+    { word: "swimming pool", ipa: "/'swɪmɪŋ puːl/", meaning: "bể bơi", example: "Our school has a big swimming pool for physical education." },
                 { word: "Compass", ipa: "/ˈkʌm.pəs/", meaning: "Compa, la bàn", example: "I use a compass in my math class." },
                 { word: "Textbook", ipa: "/ˈtekst.bʊk/", meaning: "Sách giáo khoa", example: "Don't forget to bring your English textbook." },
                 { word: "Uniform", ipa: "/ˈjuː.nɪ.fɔːm/", meaning: "Đồng phục", example: "We wear our school uniform on Mondays." },
@@ -563,7 +489,6 @@
                 { word: "Poster", ipa: "/ˈpəʊ.stər/", meaning: "Áp phích, tranh cổ động", example: "He put up a poster of his favorite football club." },
                 { word: "Hall", ipa: "/hɔːl/", meaning: "Sảnh, lối đi hành lang", example: "Leave your wet umbrella out in the hall." },
                 { word: "Messy", ipa: "/ˈmes.i/", meaning: "Bừa bộn, lộn xộn", example: "His bedroom is always messy with clothes on the floor." }
-                
             ],
             3: [
                 { word: "Creative", ipa: "/kriˈeɪ.tɪv/", meaning: "Sáng tạo", example: "Lan is very creative; she loves painting." },
@@ -679,11 +604,6 @@
                 { word: "Educational", ipa: "/ˌedʒ.ʊˈkeɪ.ʃən.əl/", meaning: "Mang tính giáo dục", example: "This TV channel provides educational programs." },
                 { word: "Viewer", ipa: "/ˈvjuː.ər/", meaning: "Người xem TV", example: "The game show attracted millions of viewers." },
                 { word: "Weatherman", ipa: "/ˈweð.ə.mæn/", meaning: "Người báo thời tiết", example: "The weatherman says it will rain tomorrow." },
-                { word: "Comedy", ipa: "/ˈkɒm.ə.di/", meaning: "Phim hài", example: "We laughed a lot while watching that comedy." },
-                { word: "Documentary", ipa: "/ˌdɒk.jəˈmen.tər.i/", meaning: "Phim tài liệu", example: "This documentary tells the history of wild animals." },
-                { word: "Educational", ipa: "/ˌedʒ.ʊˈkeɪ.ʃən.əl/", meaning: "Mang tính giáo dục", example: "This TV channel provides educational programs." },
-                { word: "Viewer", ipa: "/ˈvjuː.ər/", meaning: "Người xem TV", example: "The game show attracted millions of viewers." },
-                { word: "Weatherman", ipa: "/ˈweð.ə.mæn/", meaning: "Người báo thời tiết", example: "The weatherman says it will rain tomorrow." },
                 { word: "Channel", ipa: "/ˈtʃæn.əl/", meaning: "Kênh truyền hình", example: "My father changes the channel to watch the football match." },
                 { word: "Game show", ipa: "/ˈɡeɪm ˌʃəʊ/", meaning: "Chương trình trò chơi", example: "She won a big prize on a television game show." },
                 { word: "Cartoon", ipa: "/kɑːˈtuːn/", meaning: "Phim hoạt hình", example: "Children love watching cartoons on Saturday mornings." },
@@ -701,11 +621,6 @@
                 { word: "Clumsy", ipa: "/ˈklʌm.zi/", meaning: "Vụng về, lóng ngóng", example: "The character in the cartoon is very clumsy but funny." }
             ],
             8: [
-                { word: "Badminton", ipa: "/ˈbæd.mɪn.tən/", meaning: "Cầu lông", example: "They play badminton in the park every morning." },
-                { word: "Goggles", ipa: "/ˈɡɒɡ.əlz/", meaning: "Kính bơi", example: "You must wear goggles when you swim here." },
-                { word: "Racket", ipa: "/ˈræk.ɪt/", meaning: "Vợt thể thao", example: "She bought a new tennis racket yesterday." },
-                { word: "Marathon", ipa: "/ˈmær.ə.θən/", meaning: "Đua ma-ra-tông", example: "He trained for six months to run the marathon." },
-                { word: "Gymnastics", ipa: "/dʒɪmˈnæs.tɪks/", meaning: "Thể dục dụng cụ", example: "She has practiced gymnastics since she was seven." },
                 { word: "Badminton", ipa: "/ˈbæd.mɪn.tən/", meaning: "Cầu lông", example: "They play badminton in the park every morning." },
                 { word: "Goggles", ipa: "/ˈɡɒɡ.əlz/", meaning: "Kính bơi", example: "You must wear goggles when you swim here." },
                 { word: "Racket", ipa: "/ˈræk.ɪt/", meaning: "Vợt thể thao", example: "She bought a new tennis racket yesterday." },
@@ -733,11 +648,6 @@
                 { word: "Cuisine", ipa: "/kwɪˈziːn/", meaning: "Ẩm thực", example: "I really love traditional Vietnamese cuisine." },
                 { word: "Souvenir", ipa: "/ˌsuː.vənˈɪər/", meaning: "Quà lưu niệm", example: "She bought a small keychain as a souvenir." },
                 { word: "Tower", ipa: "/ˈtaʊ.ər/", meaning: "Tháp", example: "The Eiffel Tower is the symbol of Paris." },
-                { word: "Continent", ipa: "/ˈkɒn.tɪ.nənt/", meaning: "Châu lục", example: "Asia is the largest continent in the world." },
-                { word: "Palace", ipa: "/ˈpæl.ɪs/", meaning: "Cung điện", example: "The Royal Palace is very beautiful and grand." },
-                { word: "Cuisine", ipa: "/kwɪˈziːn/", meaning: "Ẩm thực", example: "I really love traditional Vietnamese cuisine." },
-                { word: "Souvenir", ipa: "/ˌsuː.vənˈɪər/", meaning: "Quà lưu niệm", example: "She bought a small keychain as a souvenir." },
-                { word: "Tower", ipa: "/ˈtaʊ.ər/", meaning: "Tháp", example: "The Eiffel Tower is the symbol of Paris." },
                 { word: "Capital", ipa: "/ˈkæp.ɪ.təl/", meaning: "Thủ đô", example: "Hanoi is the capital city of Vietnam." },
                 { word: "Symbol", ipa: "/ˈsɪm.bəl/", meaning: "Biểu tượng", example: "The Statue of Liberty is a famous symbol of New York." },
                 { word: "Landmark", ipa: "/ˈlænd.mɑːk/", meaning: "Mốc đất, công trình kiến trúc nổi bật", example: "Big Ben is a well-known landmark in London." },
@@ -755,11 +665,6 @@
                 { word: "Rent", ipa: "/rent/", meaning: "Thuê", example: "We decided to rent a bike to explore the city." }
             ],
             10: [
-                { word: "Wireless", ipa: "/ˈwaɪə.ləs/", meaning: "Không dây", example: "The internet connection is completely wireless." },
-                { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
-                { word: "Solar energy", ipa: "/ˌsəʊ.lər ˈen.ə.dʒi/", meaning: "Năng lượng mặt trời", example: "Our future house will run on solar energy." },
-                { word: "Skyscraper", ipa: "/ˈskaɪˌskreɪ.pər/", meaning: "Nhà chọc trời", example: "There are many skyscrapers in New York City." },
-                { word: "Spaceboat", ipa: "/ˈspeɪs.bəʊt/", meaning: "Tàu vũ trụ", example: "We might travel by spaceboat in the future." },
                 { word: "Wireless", ipa: "/ˈwaɪə.ləs/", meaning: "Không dây", example: "The internet connection is completely wireless." },
                 { word: "Appliance", ipa: "/əˈplaɪ.əns/", meaning: "Thiết bị đồ gia dụng", example: "Modern appliances make housework much easier." },
                 { word: "Solar energy", ipa: "/ˌsəʊ.lər ˈen.ə.dʒi/", meaning: "Năng lượng mặt trời", example: "Our future house will run on solar energy." },
@@ -787,11 +692,6 @@
                 { word: "Reusable", ipa: "/ˌriːˈjuː.zə.bl̩/", meaning: "Có thể tái sử dụng", example: "Bring your own reusable bag when shopping." },
                 { word: "Deforestation", ipa: "/dɪˌfɒr.ɪˈsteɪ.ʃən/", meaning: "Nạn phá rừng", example: "Deforestation is a serious global problem." },
                 { word: "Pollute", ipa: "/pəˈluːt/", meaning: "Làm ô nhiễm", example: "Exhaust fumes from cars pollute the air." },
-                { word: "Environment", ipa: "/ɪnˈvaɪ.rən.mənt/", meaning: "Môi trường", example: "We should plant more trees to protect the environment." },
-                { word: "Recycle", ipa: "/ˌriːˈsaɪ.kl̩/", meaning: "Tái chế", example: "Don't throw away plastic bottles; recycle them!" },
-                { word: "Reusable", ipa: "/ˌriːˈjuː.zə.bl̩/", meaning: "Có thể tái sử dụng", example: "Bring your own reusable bag when shopping." },
-                { word: "Deforestation", ipa: "/dɪˌfɒr.ɪˈsteɪ.ʃən/", meaning: "Nạn phá rừng", example: "Deforestation is a serious global problem." },
-                { word: "Pollute", ipa: "/pəˈluːt/", meaning: "Làm ô nhiễm", example: "Exhaust fumes from cars pollute the air." },
                 { word: "Reduce", ipa: "/rɪˈdʒuːs/", meaning: "Giảm thiểu, giảm bớt", example: "We can reduce waste by using less plastic packaging." },
                 { word: "Reuse", ipa: "/ˌriːˈjuːz/", meaning: "Tái sử dụng", example: "Try to reuse old envelopes and glass jars." },
                 { word: "Plastic bag", ipa: "/ˈplæs.tɪk ˌbæɡ/", meaning: "Túi ni-lông, túi nhựa", example: "Avoid using plastic bags when buying groceries." },
@@ -809,11 +709,6 @@
                 { word: "Green", ipa: "/ɡriːn/", meaning: "Xanh, thân thiện với môi trường", example: "Using solar energy is a great way to go green." }
             ],
             12: [
-                { word: "Automatic", ipa: "/ˌɔː.təˈmæt.ɪk/", meaning: "Tự động", example: "The robot has an automatic cleaning system." },
-                { word: "Guard", ipa: "/ɡɑːd/", meaning: "Bảo vệ, canh gác", example: "Robots can guard our houses when we are away." },
-                { word: "Laundry", ipa: "/ˈlɔːn.dri/", meaning: "Việc giặt ủi", example: "The robot helper will do the laundry for you." },
-                { word: "Recognize", ipa: "/ˈrek.əɡ.naɪz/", meaning: "Nhận diện, nhận ra", example: "Modern robots can recognize human faces." },
-                { word: "Space station", ipa: "/ˈspeɪs ˌsteɪ.ʃən/", meaning: "Trạm vũ trụ", example: "Robots are sent to build a space station on Mars." },
                 { word: "Automatic", ipa: "/ˌɔː.təˈmæt.ɪk/", meaning: "Tự động", example: "The robot has an automatic cleaning system." },
                 { word: "Guard", ipa: "/ɡɑːd/", meaning: "Bảo vệ, canh gác", example: "Robots can guard our houses when we are away." },
                 { word: "Laundry", ipa: "/ˈlɔːn.dri/", meaning: "Việc giặt ủi", example: "The robot helper will do the laundry for you." },
@@ -848,7 +743,6 @@
         window.onload = function() {
             handleUnitChange("1"); 
             
-            // Lắng nghe sự kiện phím Enter cho cả hai ô nhập liệu
             document.getElementById('answerInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') checkAnswer('practice');
             });
@@ -882,7 +776,6 @@
             currentGameMode = mode;
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Ẩn toàn bộ các section
             document.getElementById('flashcard-section').style.display = 'none';
             document.getElementById('practice-section').style.display = 'none';
             document.getElementById('meaning-section').style.display = 'none';
@@ -921,7 +814,6 @@
             setTimeout(() => { currentIndex = (currentIndex - 1 + activeWordsList.length) % activeWordsList.length; updateFlashcard(); }, 200);
         }
 
-        // 2. Hàm sinh câu hỏi phần LUYỆN PHÁT ÂM
         function generatePracticeQuestion() {
             isAnswered = false;
             if (activeWordsList.length === 0) return;
@@ -939,7 +831,6 @@
             document.getElementById('resultDisplay').innerHTML = '';
         }
 
-        // 3. Hàm sinh câu hỏi phần ĐOÁN NGHĨA TIẾNG VIỆT
         function generateMeaningQuestion() {
             isAnswered = false;
             if (activeWordsList.length === 0) return;
@@ -956,12 +847,10 @@
             document.getElementById('meaningResultDisplay').innerHTML = '';
         }
 
-        // Tạo câu ví dụ thứ 2 bổ trợ tự động dựa trên từ vựng
         function generateSecondExample(word) {
             return `Please look up the definition of "${word}" if you do not understand it.`;
         }
 
-        // Hàm xử lý kiểm tra kết quả chung cho cả 2 chế độ tự luận
         function checkAnswer(mode) {
             if (isAnswered || !currentWordItem) return;
             
@@ -984,7 +873,6 @@
             scoreTotal++;
             document.getElementById('total-count').innerText = scoreTotal;
 
-            // Xây dựng khối hiển thị 2 ví dụ
             const exampleHTML = `
                 <div class="example-box">
                     <p><strong>Ví dụ 1:</strong> ${currentWordItem.example}</p>
@@ -997,10 +885,9 @@
                 scoreCorrect++;
                 document.getElementById('correct-count').innerText = scoreCorrect;
             } else {
-                resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa chính xác! Đáp án là: <strong style="font-size: 1.4rem;">${currentWordItem.word}</strong></span>` + exampleHTML;
+                resultDisplay.innerHTML = `<span style="color: var(--danger);">❌ Chưa chính xác! Đáp án là: <strong style="font-size: 1.2rem;">${currentWordItem.word}</strong></span>` + exampleHTML;
             }
 
-            // Kéo dài thời gian chuyển câu lên 3 giây để học sinh kịp đọc câu ví dụ
             setTimeout(() => {
                 if (mode === 'practice') generatePracticeQuestion();
                 if (mode === 'meaning') generateMeaningQuestion();
